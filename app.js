@@ -1,9 +1,10 @@
-const raiz = document.getElementById("raiz");
+const root = document.getElementById("root");
 const totalPersonajes = document.getElementById("total-personajes");
 let pagina = 1;
 let total = 0;
 
 //Filtros
+
 const todos = document.getElementById("todos");
 const mujeres = document.getElementById("mujeres");
 const hombres = document.getElementById("hombres");
@@ -13,25 +14,29 @@ const noSeSabe = document.getElementById("noSeSabe");
 //Paginado
 
 const paginaActual = document.getElementById("pagina-actual");
-const proximaPagina = document.getElementById("next-page");
-const prevPagina = document.getElementById("prev-page");
+const nextPage = document.getElementById("next-page");
+const prevPage = document.getElementById("prev-page");
 const totalPaginas = document.getElementById("total-paginas");
-const primerPagina = document.getElementById("first-page");
-const ultimaPagina = document.getElementById("last-page");
+const firstPage = document.getElementById("first-page");
+const lastPage = document.getElementById("last-page");
 
-//Le estabamos pasando "Página como argumento de manera incorrecta"
 const getData = async () => {
   const URL = `https://rickandmortyapi.com/api/character?page=${pagina}`;
   const response = await fetch(URL);
+
   const json = await response.json();
+ 
   total = json.info.pages;
+
   paginaActual.innerHTML = pagina;
   totalPaginas.innerHTML = total;
   printData(json.results);
+
   updatePagination();
   data = json;
   return json;
 };
+
 getData(pagina);
 let data = {};
 
@@ -55,36 +60,36 @@ const printData = (arr) => {
                 <p>Origen: ${personaje.origin.name}</p>
                 <p>Locacion: ${personaje.location.name}</p>
             </div>
-            <hr>
             <div class="card-info">
                 <p><a href="https://rickandmortyapi.com/api/character/${personaje.id}" target="_blank">Ver más</a></p>
             </div>
         </div>
-    </div>
+      </div>
     `;
   });
-  raiz.innerHTML = card;
+  root.innerHTML = card;
 };
 
 const pagination = async (prom) => {
   const result = await prom;
-  proximaPagina.addEventListener("click", () => {
+  nextPage.addEventListener("click", () => {
     pagina += 1;
     getData();
   });
 
-  prevPagina.addEventListener("click", () => {
+  prevPage.addEventListener("click", () => {
     pagina -= 1;
     getData();
   });
 
-  primerPagina.addEventListener("click", () => {
+  firstPage.addEventListener("click", () => {
     if (pagina >= 2) {
       pagina = 1;
       getData();
     }
   });
-  ultimaPagina.addEventListener("click", () => {
+
+  lastPage.addEventListener("click", () => {
     if (pagina < result.info.pages) {
       pagina = result.info.pages;
       getData();
@@ -94,23 +99,24 @@ const pagination = async (prom) => {
 
 const updatePagination = () => {
   if (pagina <= 1) {
-    prevPagina.disabled = true;
-    primerPagina.disabled = true;
+    prevPage.disabled = true;
+    firstPage.disabled = true;
   } else {
-    prevPagina.disabled = false;
-    primerPagina.disabled = false;
+    prevPage.disabled = false;
+    firstPage.disabled = false;
   }
 
   if (pagina === total) {
-    ultimaPagina.disabled = true;
-    proximaPagina.disabled = true;
+    lastPage.disabled = true;
+    nextPage.disabled = true;
   } else {
-    ultimaPagina.disabled = false;
-    proximaPagina.disabled = false;
+    lastPage.disabled = false;
+    nextPage.disabled = false;
   }
 };
 
 //Filtros
+
 mujeres.addEventListener("click", () => {
   const arr = data.results;
   const arrMujeres = [];
@@ -135,8 +141,7 @@ hombres.addEventListener("click", () => {
   }
   printData(arrHombres);
 });
-//Primero: Elemento html
-//.addEventListener("evento", ()=>{})
+
 sinGenero.addEventListener("click", () => {
   const arr = data.results;
   const arrSinGenero = [];
@@ -153,7 +158,7 @@ noSeSabe.addEventListener("click", () => {
   const arr = data.results;
   const arrNoSeSabe = [];
 
-  for (let i = 0; i > arr.length; i++) {
+  for (let i = 0; i < arr.length; i++) {
     if (arr[i].gender === "unknown") {
       arrNoSeSabe.push(arr[i]);
     }

@@ -5,36 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rick and Morty</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <script
+      src="https://kit.fontawesome.com/bdec5d58ea.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
-    <nav>
-      <div>
-        <p>Rick and Morty</p>
+    <header>
+      <h1>Rick and Morty</h1>
+      <nav>
         <ul>
-          <li id="todos">Todos</li>
-          <li id="mujeres">Mujer</li>
-          <li id="hombres">Hombre</li>
-          <li id="sinGenero">Sin genero</li>
-          <li id="noSeSabe">No se sabe</li>
+          <li id="todos"><a href="#">Todos</a></li>
+          <li id="mujeres"><a href="#">Mujeres</a></li>
+          <li id="hombres"><a href="#">Hombres</a></li>
+          <li id="sinGenero"><a href="#">Sin Genero</a></li>
+          <li id="noSeSabe"><a href="#">No se sabe</a></li>
         </ul>
-      </div>
-    </nav>
+      </nav>
+    </header>
     <main>
-      <p>Total de personajes <span id="total-personajes"></span></p>
-      <div id="raiz"></div>
+      <p class="totalPersonajes">Total de personajes: <span id="total-personajes"></span></p>
+      <div id="root"></div>
 
       <div class="container-paginador">
         <p>Pagina actual: <span id="pagina-actual"></span></p>
         <p>Total de páginas: <span id="total-paginas"></span></p>
 
         <div class="pagination">
-          <button id="first-page">Primera</button>
-          <button id="prev-page">-</button>
-          <button id="next-page">+</button>
-          <button id="last-page">Ultima</button>
+          <button id="first-page"> Pagina de inicio- <i class="fa-solid fa-angles-left"></i></button>
+          <button id="prev-page"><i class="fa-solid fa-angle-left"></i></button>
+          <button id="next-page"><i class="fa-solid fa-angle-right"></i></button>
+          <button id="last-page"> -Pagina Final <i class="fa-solid fa-angles-right"></i></button>
         </div>
       </div>
     </main>
+    <footer>
+      <p>Realizado por: - Carlos "Charly" Gonzalez - 2023</p>
+    </footer>
     <script src="app.js"></script>
   </body>
 </html>
